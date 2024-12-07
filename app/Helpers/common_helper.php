@@ -115,3 +115,10 @@ if (!function_exists('vendorDetails')) {
         return Auth::guard('vendor')->user();
     }
 }
+
+if (!function_exists('userDetails')) {
+    function userDetails()
+    {
+        return Auth::user();
+    }
+}

@@ -17,7 +17,13 @@ class CheckRole
     public function handle(Request $request, Closure $next, $role): Response
     {
         if (!Auth::guard($role)->check()) {
-            return redirect('/admin/login');
+            if ($role == 'admin') {
+                return redirect('/admin/login');
+            } elseif ($role == 'vendor') {
+                return redirect('/vendor/login');
+            } else {
+                return redirect('/login');
+            }
         }
         return $next($request);
     }

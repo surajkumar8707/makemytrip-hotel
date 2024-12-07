@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +17,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('admin.login.form');
+    return redirect()->route('login.form');
+});
+
+// Admin routes
+Route::get('/register', [LoginController::class, 'showRegistrationForm'])->name('register.form');
+Route::post('/register', [LoginController::class, 'registrationStore'])->name('register.post');
+Route::get('/login', [LoginController::class, 'login'])->name('login.form');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login.post');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// Authenticated routes
+Route::middleware('role:web')->group(function () {
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 });
 
 Route::group(['prefix' => '/', 'as' => 'front.'], function () {
@@ -35,4 +49,4 @@ Route::group(['prefix' => '/', 'as' => 'front.'], function () {
 
 Route::get('lang/{locale}', [\App\Http\Controllers\LanguageController::class, 'switchLang']);
 
-require __DIR__ . '/auth.php';
+// require __DIR__ . '/auth.php';

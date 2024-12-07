@@ -16,12 +16,12 @@ use App\Http\Controllers\Vendors\VendorController;
 |
 */
 
-// Admin routes
-Route::get('/register', [LoginController::class, 'showVendorRegisterForm'])->name('register.form');
-Route::post('/register', [LoginController::class, 'vendorRegister'])->name('register.form');
-Route::get('/login', [LoginController::class, 'showVendorLoginForm'])->name('login.form');
-Route::post('/login', [LoginController::class, 'vendorLogin'])->name('login.post');
-Route::post('/logout', [LoginController::class, 'vendorLogout'])->name('logout');
+// vendor routes
+Route::get('/register', [LoginController::class, 'showVendorRegisterForm'])->name('vendor.register.form');
+Route::post('/register', [LoginController::class, 'vendorRegister'])->name('vendor.register.post');
+Route::get('/login', [LoginController::class, 'showVendorLoginForm'])->name('vendor.login.form');
+Route::post('/login', [LoginController::class, 'vendorLogin'])->name('vendor.login.post');
+Route::post('/logout', [LoginController::class, 'vendorLogout'])->name('vendor.logout');
 
 // Authenticated routes
 Route::middleware('role:vendor')->group(function () {

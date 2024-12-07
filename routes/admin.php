@@ -55,31 +55,13 @@ Route::middleware('role:admin')->group(function () {
     Route::post('/social-media-update/{id}', [AdminController::class, 'socialMediaUpdate'])->name('social.media.update');
 
     // Pages
-    Route::group(['prefix' => '/pages', 'as' => 'pages.'], function () {
-        Route::get('/about', [AdminController::class, 'aboutPage'])->name('about');
-        Route::get('/our-room', [AdminController::class, 'ourRoomPage'])->name('our.room');
-        Route::get('/gallery', [AdminController::class, 'galleryPage'])->name('gallery');
-    });
+    // Route::group(['prefix' => '/pages', 'as' => 'pages.'], function () {
+    //     Route::get('/about', [AdminController::class, 'aboutPage'])->name('about');
+    //     Route::get('/our-room', [AdminController::class, 'ourRoomPage'])->name('our.room');
+    //     Route::get('/gallery', [AdminController::class, 'galleryPage'])->name('gallery');
+    // });
 
-    Route::resource('home-page-carousel', HomePageCarouselController::class);
-    Route::post('/change-status', [HomePageCarouselController::class, 'changeStatus'])->name('change.status');
+    // Route::resource('home-page-carousel', HomePageCarouselController::class);
+    // Route::post('/change-status', [HomePageCarouselController::class, 'changeStatus'])->name('change.status');
 
-    Route::resource('categories', CategoryController::class);
-    Route::resource('sub-categories', SubCategoryController::class);
-    Route::resource('tests', TestController::class);
-
-    Route::resource('report', ReportController::class);
-    Route::group(['prefix' => '/report', 'as' => 'report.'], function () {
-        Route::post('/store', [ReportController::class, 'store'])->name('store');
-        Route::get('/generate-report/{report_id}', [ReportController::class, 'generateReport'])->name('generate.report');
-        Route::get('/receipt-report/{report_id}', [ReportController::class, 'receiptReport'])->name('receipt.report');
-        Route::post('/save-single-test', [ReportController::class, 'saveSingleTest'])->name('save.single.test');
-        Route::post('/fetch-subcategory', [ReportController::class, 'fetchSubcategory'])->name('fetch.subcategory');
-        Route::post('/fetch-test', [ReportController::class, 'fetchTest'])->name('fetch.test');
-        Route::get('/view/{report_id}', [ReportController::class, 'viewReport'])->name('view.report');
-        Route::post('/update-lower-value', [ReportController::class, 'updateLowerValue'])->name('update.lower.value');
-        Route::post('save/all/lower/values', [ReportController::class, 'saveAllLowerValues'])->name('save.all.lower.values');
-    });
-    Route::get('/report-setting', [ReportSettingController::class, 'index'])->name('report.setting');
-    Route::post('/report-setting/settings/update/{id}', [ReportSettingController::class, 'settingUpdate'])->name('report.setting.update');
 });
